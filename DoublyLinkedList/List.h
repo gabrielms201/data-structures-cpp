@@ -45,11 +45,11 @@ public:
 	bool isEmpty() const;
 	bool isFull() const;
 	std::string toString() const;
-	Node* find(TYPE data) const;
-	Node* remove(TYPE data) const;
+	Node* find(TYPE data) const;			// O(n)
 
-	bool insert();
-	bool clear();
+	bool remove(TYPE data);				// O(n)
+	void insert(TYPE data);					// O(1)
+	void clear();
 
 private:
 	Node* _head;

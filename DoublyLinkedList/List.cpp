@@ -7,7 +7,6 @@ Node::Node(TYPE data, Node* nextNode, Node* previousNode)
 	: _data(data), _nextNode(nextNode), _previousNode(previousNode) {}
 
 // List Class
-
 List::List()
 {
 	_head = nullptr;
@@ -22,11 +21,7 @@ List::~List()
 
 bool List::isEmpty() const
 {
-	if (_head == nullptr)
-	{
-		return true;
-	}
-	return false;
+	return (_head == nullptr);
 }
 
 bool List::isFull() const
@@ -70,34 +65,116 @@ Node* List::find(TYPE data) const
 	{
 		return ptr;
 	}
-	while (ptr->getNextNode() != _head && ptr->getData() != data)
+
+	// If is not at the beginning, search for it:
+	while (ptr->getNextNode() != nullptr && ptr->getData() != data)
 	{
 		ptr = ptr->getNextNode();
 	}
 
-	//if (!(ptr != _head && ptr->getData() == data))
-	//{
-	//	return nullptr;
-	//} 
-	// De Morgan
-	if (ptr == _head || ptr->getData() != data)
+	// If we didn't found it:
+	if (ptr->getData() != data)
 	{
 		return nullptr;
-	}
+	} 
 	return ptr;
 }
 
-Node* List::remove(TYPE data) const
+bool List::remove(TYPE data)
 {
-	return nullptr;
+	Node* node = find(data);
+
+	if (_tail == _head && _head == node)
+	{
+		_qty--;
+		delete node;
+		_tail = nullptr;
+		_head = nullptr;
+		return node;
+	}
+	if (_tail == node)
+	{
+		Node* prev = node->getPreviousNode();
+		prev->setNextNode(nullptr);
+		_tail = prev;
+		_qty--;
+		delete node;
+		return node;
+	}
+
+	if (_head == node)
+	{
+		Node* next = node->getNextNode();
+		next->setPreviousNode(nullptr);
+		_head = next;
+		_qty--;
+		delete node;
+		return node;
+	}
+
+	if (node) // = node != nullptr
+	{
+		Node* prev = node->getPreviousNode();
+		Node* next = node->getNextNode();
+		prev->setNextNode(node->getNextNode());
+		next->setPreviousNode(prev);
+		_qty--;
+		delete node;
+	}
+	return node;
 }
 
-bool List::insert()
+void List::insert(TYPE data)
 {
-	return false;
+	Node* node = new Node(data, nullptr, nullptr);
+	// If the list is empty, then we add the node in the head and make it point to itself
+	if (isEmpty())
+	{
+		_head = node;
+		_tail = node;
+		node->setPreviousNode(nullptr);
+		node->setNextNode(nullptr);
+		_qty++;
+		return;
+	}
+	// If the list isn't empty, then we append the given data to the tail
+	Node* ptr = _tail;
+	ptr->setNextNode(node);
+	node->setNextNode(nullptr);
+	node->setPreviousNode(_tail);
+	_tail = node;
+	_qty++;
 }
 
-bool List::clear()
+void List::clear()
 {
-	return false;
+	Node* ptr = _head;
+	Node* prev = _head;
+
+
+	while (ptr)
+	{
+		prev = ptr;
+		ptr = ptr->getNextNode();
+		prev->setNextNode(nullptr);
+		delete prev;
+		prev = nullptr;
+		_qty--;
+	}
+	_head = nullptr;
+	_tail = nullptr;
+
+
+	//Node* ptr = _head;
+
+	//while (ptr)
+	//{
+	//	//ptr->getPreviousNode() 
+	//	ptr = ptr->getNextNode();
+	//	ptr->getPreviousNode()->setNextNode(nullptr);
+	//	delete ptr->getPreviousNode();
+	//	ptr->setPreviousNode(nullptr);
+	// 	_qty--;
+	//}
+
 }
