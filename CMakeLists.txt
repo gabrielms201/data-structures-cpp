@@ -8,4 +8,6 @@ add_subdirectory("Deque")
 add_subdirectory("SinglyLinkedList")
 add_subdirectory("DoublyLinkedList")
 add_subdirectory("CircularLinkedList")
+add_subdirectory("BinarySearchTree")
+
 
