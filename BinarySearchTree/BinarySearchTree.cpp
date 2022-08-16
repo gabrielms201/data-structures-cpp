@@ -47,15 +47,7 @@ Node* BST::Search(TYPE value) const
 			node = node->_left;
 		}
 	}
-	if (node == nullptr)
-	{
-		return nullptr;
-	}
-	if (node->_data == value)
-	{
-		return node;
-	}
-	
+	return node;
 }
 
 BST::BST()
