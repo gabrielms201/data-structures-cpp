@@ -36,7 +36,7 @@ Node* BST::Search(TYPE value) const
 {
 	Node* node = nullptr;
 	node = _root;
-	while (node->_data != value)
+	while (node != nullptr && node->_data != value)
 	{
 		if (value > node->_data)
 		{
@@ -47,11 +47,15 @@ Node* BST::Search(TYPE value) const
 			node = node->_left;
 		}
 	}
+	if (node == nullptr)
+	{
+		return nullptr;
+	}
 	if (node->_data == value)
 	{
 		return node;
 	}
-	return nullptr;
+	
 }
 
 BST::BST()
