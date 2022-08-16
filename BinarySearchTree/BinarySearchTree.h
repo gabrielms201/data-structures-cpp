@@ -10,7 +10,7 @@ private:
 	TYPE _data;
 	Node* _right;
 	Node* _left;
-
+	friend class BST;
 public:
 	void Insert(TYPE value);
 	Node(TYPE value);
@@ -30,6 +30,9 @@ class BST
 private:
 	Node* _root;
 public:
+
+	Node* Search(TYPE value) const;
+
 	// Setters
 	Node* GetRoot() const { return _root; }
 	// Setters

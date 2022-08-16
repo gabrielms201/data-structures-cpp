@@ -32,6 +32,28 @@ Node::Node(TYPE value)
 {
 }
 
+Node* BST::Search(TYPE value) const
+{
+	Node* node = nullptr;
+	node = _root;
+	while (node->_data != value)
+	{
+		if (value > node->_data)
+		{
+			node = node->_right;
+		}
+		else
+		{
+			node = node->_left;
+		}
+	}
+	if (node->_data == value)
+	{
+		return node;
+	}
+	return nullptr;
+}
+
 BST::BST()
 	: _root(nullptr)
 {
