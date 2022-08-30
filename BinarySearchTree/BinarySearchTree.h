@@ -13,6 +13,7 @@ private:
 	friend class BST;
 public:
 	void Insert(TYPE value);
+	Node* Delete(Node* node, TYPE value);
 	Node(TYPE value);
 	~Node();
 	// Setters
@@ -41,5 +42,6 @@ public:
 	BST();
 	~BST();
 	void Insert(TYPE data);
+	Node* Remove(TYPE data);
 
 };

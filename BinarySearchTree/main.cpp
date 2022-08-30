@@ -16,7 +16,7 @@ void populateVector(std::vector<int>& vec, size_t size)
 	}
 }
 
-int main(int argc, char* argv[])
+int main2(int argc, char* argv[])
 {
 	srand(time(NULL));
 	BST tree = BST();
@@ -38,4 +38,20 @@ int main(int argc, char* argv[])
 	}
 
 	std::cout << boolToString(foundEverything);
+}
+int main()
+{
+	BST tree = BST();
+
+
+	tree.Insert(3);
+	tree.Insert(1);
+	tree.Insert(5);
+	tree.Insert(8);
+	tree.Insert(4);
+	tree.Insert(9);
+	tree.Insert(7);
+
+	Node* foo = tree.Remove(5);
+	std::cout << "dasdas";
 }
